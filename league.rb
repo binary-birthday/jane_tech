@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Soccer league. Init with text file of league results. Call public method process_league_results to process the text files and print to std out the top three teams in the league standings after each matchday
+# Soccer league. Init with text file of league results. Instance method process_league_results parses the text files and prints to std out the top three teams in the league standings after each matchday
 class League
   def initialize(league_results)
     @track_matchday = {}
