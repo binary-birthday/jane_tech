@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Process text file of league results and print the top three teams in the league standings after each matchday
+# Soccer league. Init with text file of league results. Call public method process_league_results to process and print the top three teams in the league standings after each matchday
 class League
   def initialize(league_results)
     @track_matchday = {}
