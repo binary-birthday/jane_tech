@@ -16,10 +16,25 @@ class League
     @league_results.each do |entry|
       process_match_result(entry)
     end
+    @matchday_count += 1
     print_standings
   end
 
   private
+
+  def process_match_result(entry)
+    parse_match_result(entry)
+
+    if new_matchday?
+      @matchday_count += 1
+      @track_matchday = {}
+      print_standings
+    end
+
+    team_one_points, team_two_points = determine_match_points
+    record_match_result(team_one_points, team_two_points)
+    @match.clear
+  end
 
   def parse_match_result(entry)
     teams_and_scores = entry.sub(', ', '').split(/([0-9])/)
@@ -56,20 +71,6 @@ class League
       @team_records[team_one] = team_one_points
       @team_records[team_two] = team_two_points
     end
-  end
-
-  def process_match_result(entry)
-    parse_match_result(entry)
-
-    if new_matchday?
-      @matchday_count += 1
-      @track_matchday = {}
-      print_standings
-    end
-
-    team_one_points, team_two_points = determine_match_points
-    record_match_result(team_one_points, team_two_points)
-    @match.clear
   end
 
   def determine_top_three
